@@ -1,8 +1,7 @@
 ## Como rodar o projeto
-
-1 - cd server
-2 - npm install
-3 - npm run dev
+- cd server
+- npm install
+- npm run dev
 
 ## Módulos e dependências instaladas
 - Banco dados MongoDB
