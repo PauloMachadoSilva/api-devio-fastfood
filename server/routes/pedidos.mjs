@@ -12,7 +12,6 @@ router.get("/:status", async (req, res) => {
   let query = {status : status === 'pedido' ? undefined : status };
   let results = await collection
     .find(query)
-    // .limit(50)
     .toArray();
 
   res.send(results).status(200);
@@ -20,12 +19,10 @@ router.get("/:status", async (req, res) => {
 
 router.get("/retirada", async (req, res) => {
     let status = String(req.params.status);
-    console.log(status,'<<<')
     let collection = await db.collection("pedidos");
     let query = {status : 'retirada' };
     let results = await collection
       .find(query)
-      // .limit(50)
       .toArray();
   
     res.send(results).status(200);
@@ -54,17 +51,12 @@ router.post("/confirmar", async (req, res) => {
 
 router.post("/recusar", async (req, res) => {
     let body = req.body;
-    console.log(body,'<<<<')
     const query = { _id: ObjectId(body._id) };
     const updates = {
       $set: { 
         status: 'recusado', 
       }
-    }
-  
-    console.log(query);
-    console.log(updates);
-  
+    }  
     let collection = await db.collection("pedidos");
     let result = await collection.updateOne(query, updates);
     res.send(result).status(200);
@@ -78,10 +70,7 @@ router.post("/recusar", async (req, res) => {
         status: undefined, 
       }
     }
-  
-    console.log(query);
-    console.log(updates);
-  
+    
     let collection = await db.collection("pedidos");
     let result = await collection.updateOne(query, updates);
     res.send(result).status(200);
@@ -95,10 +84,7 @@ router.post("/recusar", async (req, res) => {
         status: 'retirada', 
       }
     }
-  
-    console.log(query);
-    console.log(updates);
-  
+    
     let collection = await db.collection("pedidos");
     let result = await collection.updateOne(query, updates);
     res.send(result).status(200);
